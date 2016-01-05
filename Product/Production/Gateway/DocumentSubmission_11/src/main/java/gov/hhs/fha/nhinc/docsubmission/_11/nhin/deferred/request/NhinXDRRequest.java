@@ -26,20 +26,19 @@
  */
 package gov.hhs.fha.nhinc.docsubmission._11.nhin.deferred.request;
 
-import ihe.iti.xds_b._2007.ProvideAndRegisterDocumentSetRequestType;
 import gov.hhs.fha.nhinc.aspect.InboundMessageEvent;
 import gov.hhs.fha.nhinc.docsubmission.aspect.DocSubmissionArgTransformerBuilder;
 import gov.hhs.fha.nhinc.docsubmission.aspect.DocSubmissionBaseEventDescriptionBuilder;
 import gov.hhs.fha.nhinc.docsubmission.inbound.deferred.request.InboundDocSubmissionDeferredRequest;
 import gov.hhs.healthit.nhin.XDRAcknowledgementType;
-
+import ihe.iti.xds_b._2007.ProvideAndRegisterDocumentSetRequestType;
 import javax.annotation.Resource;
 import javax.xml.ws.BindingType;
 import javax.xml.ws.WebServiceContext;
 import javax.xml.ws.soap.Addressing;
+import javax.xml.ws.soap.SOAPBinding;
 
-
-@BindingType(value = javax.xml.ws.soap.SOAPBinding.SOAP12HTTP_BINDING)
+@BindingType(value = SOAPBinding.SOAP12HTTP_BINDING)
 @Addressing(enabled = true)
 public class NhinXDRRequest implements ihe.iti.xdr._2007.XDRDeferredRequestPortType {
 
@@ -54,12 +53,12 @@ public class NhinXDRRequest implements ihe.iti.xdr._2007.XDRDeferredRequestPortT
      */
     @Override
     @InboundMessageEvent(serviceType = "Document Submission Deferred Request", version = "1.1",
-            beforeBuilder = DocSubmissionBaseEventDescriptionBuilder.class,
-            afterReturningBuilder = DocSubmissionArgTransformerBuilder.class)
+        beforeBuilder = DocSubmissionBaseEventDescriptionBuilder.class,
+        afterReturningBuilder = DocSubmissionArgTransformerBuilder.class)
     public XDRAcknowledgementType provideAndRegisterDocumentSetBDeferredRequest(
-            ProvideAndRegisterDocumentSetRequestType body) {
+        ProvideAndRegisterDocumentSetRequestType body) {
         return new NhinDocSubmissionDeferredRequestImpl(inboundDocSubmissionRequest)
-                .provideAndRegisterDocumentSetBRequest(body, context);
+            .provideAndRegisterDocumentSetBRequest(body, context);
     }
 
     public void setInboundDocSubmissionRequest(InboundDocSubmissionDeferredRequest inboundDocSubmissionRequest) {

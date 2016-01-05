@@ -33,17 +33,16 @@ import gov.hhs.fha.nhinc.messaging.server.BaseService;
 import gov.hhs.fha.nhinc.patientdiscovery.aspect.MCCIIN000002UV01EventDescriptionBuilder;
 import gov.hhs.fha.nhinc.patientdiscovery.aspect.PRPAIN201305UV02ArgTransformer;
 import gov.hhs.fha.nhinc.patientdiscovery.outbound.deferred.request.OutboundPatientDiscoveryDeferredRequest;
-
 import javax.annotation.Resource;
 import javax.xml.ws.BindingType;
 import javax.xml.ws.WebServiceContext;
 import javax.xml.ws.soap.Addressing;
-
+import javax.xml.ws.soap.SOAPBinding;
 import org.hl7.v3.MCCIIN000002UV01;
 import org.hl7.v3.RespondingGatewayPRPAIN201305UV02RequestType;
 
 @Addressing(enabled = true)
-@BindingType(value = javax.xml.ws.soap.SOAPBinding.SOAP12HTTP_BINDING)
+@BindingType(value = SOAPBinding.SOAP12HTTP_BINDING)
 public class EntityPatientDiscoveryDeferredRequestUnsecured extends BaseService implements
     EntityPatientDiscoveryAsyncReqPortType {
 

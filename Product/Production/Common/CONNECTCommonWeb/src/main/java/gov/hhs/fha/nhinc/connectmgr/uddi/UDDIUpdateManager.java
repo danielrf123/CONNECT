@@ -51,6 +51,7 @@ public class UDDIUpdateManager implements gov.hhs.fha.nhinc.nhinccomponentuddiup
         }
     }
 
+    @Override
     public gov.hhs.fha.nhinc.common.connectionmanagerinfo.UDDIUpdateManagerForceRefreshResponseType forceRefreshFileFromUDDIServer(
             gov.hhs.fha.nhinc.common.connectionmanagerinfo.UDDIUpdateManagerForceRefreshRequestType uddiUpdateManagerForceRefreshRequest) {
         UDDIUpdateManagerHelper helper = new UDDIUpdateManagerHelper();

@@ -28,12 +28,10 @@ package gov.hhs.fha.nhinc.patientcorrelation.nhinc;
 
 import gov.hhs.fha.nhinc.common.nhinccommon.AssertionType;
 import gov.hhs.fha.nhinc.cxf.extraction.SAML2AssertionExtractor;
-
 import javax.annotation.Resource;
-import javax.jws.WebService;
 import javax.xml.ws.BindingType;
 import javax.xml.ws.WebServiceContext;
-
+import javax.xml.ws.soap.SOAPBinding;
 import org.hl7.v3.AddPatientCorrelationSecuredRequestType;
 import org.hl7.v3.AddPatientCorrelationSecuredResponseType;
 import org.hl7.v3.RetrievePatientCorrelationsSecuredRequestType;
@@ -43,7 +41,7 @@ import org.hl7.v3.RetrievePatientCorrelationsSecuredResponseType;
  *
  * @author Sai Valluripalli
  */
-@BindingType(value = javax.xml.ws.soap.SOAPBinding.SOAP12HTTP_BINDING)
+@BindingType(value = SOAPBinding.SOAP12HTTP_BINDING)
 public class PatientCorrelationServiceSecured implements gov.hhs.fha.nhinc.nhinccomponentpatientcorrelation.PatientCorrelationSecuredPortType {
 
     @Resource
@@ -56,18 +54,20 @@ public class PatientCorrelationServiceSecured implements gov.hhs.fha.nhinc.nhinc
     }
 
     public PatientCorrelationServiceSecured(
-            PatientCorrelationServiceFactory<RetrievePatientCorrelationsSecuredRequestType, RetrievePatientCorrelationsSecuredResponseType, AddPatientCorrelationSecuredRequestType, AddPatientCorrelationSecuredResponseType> factory) {
+        PatientCorrelationServiceFactory<RetrievePatientCorrelationsSecuredRequestType, RetrievePatientCorrelationsSecuredResponseType, AddPatientCorrelationSecuredRequestType, AddPatientCorrelationSecuredResponseType> factory) {
         service = factory.createPatientCorrelationService();
     }
 
+    @Override
     public RetrievePatientCorrelationsSecuredResponseType retrievePatientCorrelations(
-            RetrievePatientCorrelationsSecuredRequestType request) {
+        RetrievePatientCorrelationsSecuredRequestType request) {
         AssertionType assertion = SAML2AssertionExtractor.getInstance().extractSamlAssertion(context);
         return service.retrievePatientCorrelations(request, assertion);
     }
 
+    @Override
     public AddPatientCorrelationSecuredResponseType addPatientCorrelation(
-            AddPatientCorrelationSecuredRequestType request) {
+        AddPatientCorrelationSecuredRequestType request) {
         AssertionType assertion = SAML2AssertionExtractor.getInstance().extractSamlAssertion(context);
         return service.addPatientCorrelation(request, assertion);
     }

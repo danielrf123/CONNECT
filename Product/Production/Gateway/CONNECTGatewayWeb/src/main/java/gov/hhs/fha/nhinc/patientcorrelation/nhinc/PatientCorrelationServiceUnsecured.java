@@ -29,11 +29,10 @@ package gov.hhs.fha.nhinc.patientcorrelation.nhinc;
 import gov.hhs.fha.nhinc.async.AsyncMessageIdExtractor;
 import gov.hhs.fha.nhinc.common.nhinccommon.AssertionType;
 import gov.hhs.fha.nhinc.cxf.extraction.SAML2AssertionExtractor;
-
 import javax.annotation.Resource;
 import javax.xml.ws.BindingType;
 import javax.xml.ws.WebServiceContext;
-
+import javax.xml.ws.soap.SOAPBinding;
 import org.hl7.v3.AddPatientCorrelationRequestType;
 import org.hl7.v3.AddPatientCorrelationResponseType;
 import org.hl7.v3.RetrievePatientCorrelationsRequestType;
@@ -43,9 +42,10 @@ import org.hl7.v3.RetrievePatientCorrelationsResponseType;
  *
  * @author jhoppesc
  */
-@BindingType(value = javax.xml.ws.soap.SOAPBinding.SOAP12HTTP_BINDING)
+@BindingType(value = SOAPBinding.SOAP12HTTP_BINDING)
 public class PatientCorrelationServiceUnsecured implements
-        gov.hhs.fha.nhinc.nhinccomponentpatientcorrelation.PatientCorrelationPortType {
+    gov.hhs.fha.nhinc.nhinccomponentpatientcorrelation.PatientCorrelationPortType {
+
     @Resource
     private WebServiceContext context;
 
@@ -59,12 +59,13 @@ public class PatientCorrelationServiceUnsecured implements
     }
 
     public PatientCorrelationServiceUnsecured(
-            PatientCorrelationServiceFactory<RetrievePatientCorrelationsRequestType, RetrievePatientCorrelationsResponseType, AddPatientCorrelationRequestType, AddPatientCorrelationResponseType> factory) {
+        PatientCorrelationServiceFactory<RetrievePatientCorrelationsRequestType, RetrievePatientCorrelationsResponseType, AddPatientCorrelationRequestType, AddPatientCorrelationResponseType> factory) {
         service = factory.createPatientCorrelationService();
     }
 
+    @Override
     public RetrievePatientCorrelationsResponseType retrievePatientCorrelations(
-            RetrievePatientCorrelationsRequestType retrievePatientCorrelationsRequest) {
+        RetrievePatientCorrelationsRequestType retrievePatientCorrelationsRequest) {
         AssertionType assertionType = SAML2AssertionExtractor.getInstance().extractSamlAssertion(context);
 
         if (retrievePatientCorrelationsRequest != null && retrievePatientCorrelationsRequest.getAssertion() != null) {
@@ -73,8 +74,9 @@ public class PatientCorrelationServiceUnsecured implements
         return service.retrievePatientCorrelations(retrievePatientCorrelationsRequest, assertionType);
     }
 
+    @Override
     public AddPatientCorrelationResponseType addPatientCorrelation(
-            AddPatientCorrelationRequestType addPatientCorrelationRequest) {
+        AddPatientCorrelationRequestType addPatientCorrelationRequest) {
         AssertionType assertionType = SAML2AssertionExtractor.getInstance().extractSamlAssertion(context);
 
         if (addPatientCorrelationRequest != null && addPatientCorrelationRequest.getAssertion() != null) {
