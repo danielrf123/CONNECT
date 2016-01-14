@@ -29,6 +29,7 @@ package gov.hss.fha.nhinc.admingui.servlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,22 +37,21 @@ import gov.hhs.fha.nhinc.admingui.display.DirectDisplayController;
 import gov.hhs.fha.nhinc.admingui.display.FhirDisplayController;
 
 /**
- * Started on webapplication init, checks whether to enable/disable displays during the initial login 
- * to the ADMIN GUI.
+ * Started on webapplication init, checks whether to enable/disable displays during the initial login to the ADMIN GUI.
  */
 public class InitServlet extends HttpServlet {
 
-	private static final long serialVersionUID = -7194100487044821581L;
-	private static final Logger LOG = LoggerFactory.getLogger(InitServlet.class);
+    private static final long serialVersionUID = -7194100487044821581L;
+    private static final Logger LOG = LoggerFactory.getLogger(InitServlet.class);
 
-	@Override
+    @Override
     public void init(ServletConfig config) throws ServletException {
-		super.init(config);
-		
-		//The below checkDisplay() calls were originally called in a checkDisplay method in the LoginBean.
-		new DirectDisplayController().checkDisplay();
-		new FhirDisplayController().checkDisplay();
-		// can add additional checks for enable / disable other displays in the future
-	}
-	
+        super.init(config);
+
+        // The below checkDisplay() calls were originally called in a checkDisplay method in the LoginBean.
+        new DirectDisplayController().checkDisplay();
+        new FhirDisplayController().checkDisplay();
+        // can add additional checks for enable / disable other displays in the future
+    }
+
 }

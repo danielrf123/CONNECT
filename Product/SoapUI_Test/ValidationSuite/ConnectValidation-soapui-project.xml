@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
--<con:soapui-project abortOnError="false" name="ConnectValidation" resourceRoot="${projectDir}" runType="SEQUENTIAL" soapui-version="5.1.2" activeEnvironment="Default" id="449331bb-af1f-4163-a65d-a91b4cb5a884" xmlns:con="http://eviware.com/soapui/config">
+<con:soapui-project abortOnError="false" name="ConnectValidation" resourceRoot="${projectDir}" runType="SEQUENTIAL" soapui-version="5.1.2" activeEnvironment="Default" id="449331bb-af1f-4163-a65d-a91b4cb5a884" xmlns:con="http://eviware.com/soapui/config">
   <con:settings/>
   <con:interface anonymous="optional" bindingName="{urn:gov:hhs:fha:nhinc:entitydocquery}EntityDocQueryBindingSoap" definition="${projectDir}/../target/wsdl/EntityDocQuery.wsdl" name="EntityDocQueryBindingSoap" soapVersion="1_2" type="wsdl" wsaVersion="NONE" xsi:type="con:WsdlInterface" id="cca16490-63e3-4a26-a6d0-0be4cbad8f9f" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <con:settings/>
