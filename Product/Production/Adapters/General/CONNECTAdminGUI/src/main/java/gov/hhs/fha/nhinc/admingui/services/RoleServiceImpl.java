@@ -42,7 +42,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class RoleServiceImpl implements RoleService {
 
-    @Autowired
+	private static final long serialVersionUID = -7778943978909089913L;
+	@Autowired
     private UserLoginDAO userDAO;
 
     /**
